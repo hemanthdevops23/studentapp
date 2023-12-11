@@ -27,14 +27,14 @@
   </build>
    <distributionManagement>
         <repository>
-            <id>deployment</id>
+            <id>deploymentRepo</id>
             <name>Internal Releases</name>
-            <url>http://192.168.234.131:8081/repository/studentapp//</url>
+            <url>http://192.168.234.132:8081/repository/google//</url>
         </repository>
         <snapshotRepository>
-            <id>deployment</id>
+            <id>deploymentRepo</id>
             <name>Internal Snapshot Releases</name>
-            <url>http://192.168.234.131:8081/repository/studentapp/</url>
+            <url>http://192.168.234.132:8081/repository/google/</url>
         </snapshotRepository>
     </distributionManagement>
   <dependencies>

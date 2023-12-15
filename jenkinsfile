@@ -1,27 +1,42 @@
-node {
-        tools {
-           maven 'mvn3.5+'
+pipeline {
+    agent any
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "mvn3.5+"
+    }
+
+    stages {
+        stage('clone') {
+            steps {
+                // Get some code from a GitHub repository
+                git changelog: false, credentialsId: 'hemanthdevops23/studentapp', poll: false, url: 'https://github.com/hemanthdevops23/studentapp.git'
+            }
         }
-    	stage('git-clone'){
-			//** git branch: 'pushyami', changelog: false, credentialsId: 'github', poll: false, url: 'https://github.com/devops090/Studentapp.git'
-        		//**git branch: 'pushyami', credentialsId: 'github', url: 'https://github.com/devops090/Studentapp.git'*//
-			git changelog: false, credentialsId: 'hemanthdevops23/studentapp', poll: false, url: 'https://github.com/hemanthdevops23/Studentapp.git'
-	    }
-    	stage('mvn-clean'){
-    	        sh 'export maven_home=/etc/apache-maven-3.9.6'
-                sh 'export PATH=${maven_home}/bin:${PATH}'
-        		sh 'mvn clean'      
-    	}
-    	stage('mvn-compile'){
-        		sh 'mvn compile'       
-    	}
-	    stage('mvn-sonar'){
-        	    sh 'mvn sonar:sonar -Dsonar.projectKey=studentapp -Dsonar.host.url=http://192.168.234.132:9000 -Dsonar.login=sqp_d1b5d2cb133cd9eb10eff1534c0ae8cc38dec196'
-    	}
-    	stage('mvn-package'){
-        		sh 'mvn package'
-    	}
-	stage('mvn-Deploy'){
-        		sh 'mvn deploy'
-    	}
- }
+        stage('maven-clean') {
+            steps {
+                sh "mvn clean"
+            }
+        }
+        stage('maven-compile') {
+            steps {
+                sh "mvn compile"
+            }
+        }
+        stage('codequality-sonar') {
+            steps {
+                sh "mvn sonar:sonar -Dsonar.projectKey=studentapp -Dsonar.host.url=http://192.168.234.133:9000 -Dsonar.login=sqp_d1b5d2cb133cd9eb10eff1534c0ae8cc38dec196"
+            }
+        }
+        stage('maven-build') {
+            steps {
+                sh "mvn package"
+            }
+        }
+        stage('maven-deploy') {
+            steps {
+                sh "mvn deploy"
+            }
+        }  
+    }
+}

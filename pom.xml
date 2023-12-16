@@ -29,12 +29,12 @@
         <repository>
             <id>deploymentRepo</id>
             <name>Internal Releases</name>
-            <url>http://192.168.234.133:8081/repository/google//</url>
+            <url>http://192.168.234.134:8081/repository/google//</url>
         </repository>
         <snapshotRepository>
             <id>deploymentRepo</id>
             <name>Internal Snapshot Releases</name>
-            <url>http://192.168.234.133:8081/repository/google/</url>
+            <url>http://192.168.234.134:8081/repository/google/</url>
         </snapshotRepository>
     </distributionManagement>
   <dependencies>

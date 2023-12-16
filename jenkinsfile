@@ -25,7 +25,7 @@ pipeline {
         }
         stage('codequality-sonar') {
             steps {
-                sh "mvn sonar:sonar -Dsonar.projectKey=studentapp -Dsonar.host.url=http://192.168.234.133:9000 -Dsonar.login=sqp_d1b5d2cb133cd9eb10eff1534c0ae8cc38dec196"
+                sh "mvn sonar:sonar -Dsonar.projectKey=studentapp -Dsonar.host.url=http://192.168.234.134:9000 -Dsonar.login=sqp_d1b5d2cb133cd9eb10eff1534c0ae8cc38dec196"
             }
         }
         stage('maven-build') {
@@ -35,7 +35,7 @@ pipeline {
         }
         stage('maven-deploy') {
             steps {
-                sh "mvn deploy"
+                sh "mvn -s ./settings.xml deploy"
             }
         }  
     }
